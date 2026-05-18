@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>De Todo Un Poco - Catálogo en Línea</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">De Todo Un Poco</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#catalogo">Catálogo</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contacto">Pedido</a></li>
+            </ul>
+
+            <button class="btn btn-outline-light position-relative" data-bs-toggle="offcanvas" data-bs-target="#carritoOffcanvas">
+                Carrito
+                <span id="cart-counter" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<header class="hero-banner text-center text-md-start">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Productos técnologicos y cotidianos a un clic</h1>
+        <p class="lead">Calidad para tu hogar.</p>
+        <a href="#catalogo" class="btn btn-primary btn-lg mt-3">Ver Catálogo</a>
+    </div>
+</header>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="carritoOffcanvas" aria-labelledby="carritoOffcanvasLabel">
+    <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title fw-bold" id="carritoOffcanvasLabel">Tu Carrito</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column">
+
+        <div id="carrito-items" class="flex-grow-1 overflow-auto">
+            <p class="text-muted text-center mt-4">Tu carrito está vacío.</p>
+        </div>
+
+        <div class="border-top pt-3 mt-3">
+            <div class="d-flex justify-content-between fs-5 fw-bold mb-3">
+                <span>Total:</span>
+                <span id="carrito-total" class="text-primary">C$ 0.00</span>
+            </div>
+            <button type="button" class="btn btn-success w-100 py-2 fw-bold" onclick="enfocarFormulario()">Proceder con el envío</button>
+        </div>
+    </div>
+</div>
+
+<main class="container my-5" id="catalogo">
+    <h2 class="text-center mb-4">Catálogo de Productos</h2>
+
+    <div class="d-flex justify-content-center mb-4 gap-2 flex-wrap" id="categoria-container">
+    </div>
+
+    <div class="row g-4" id="product-container">
+    </div>
+</main>
+
+<section class="bg-light py-5" id="contacto">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3 class="text-center mb-4">Simular Pedido</h3>
+                        <form id="orderForm" novalidate>
+                            <div class="mb-3">
+                                <label class="form-label">Nombre Completo</label>
+                                <input type="text" class="form-control" id="clienteNombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="clienteCorreo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Dirección de Entrega</label>
+                                <textarea class="form-control" id="direccionComentario" rows="2" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Enviar Pedido</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="productoModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitulo"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="" id="modalImagen" class="img-fluid rounded mb-3" style="max-height: 250px;">
+                <p id="modalDescripcion"></p>
+                <h4 id="modalPrecio" class="text-primary"></h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary w-100" id="btnModalAgregar">Agregar al Carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="cartToast" class="toast align-items-center text-bg-success border-0" role="alert">
+        <div class="d-flex">
+            <div class="toast-body">¡Producto añadido!</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script th:inline="javascript">
+    const productos = /*[[${productos}]]*/ [];
+</script>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

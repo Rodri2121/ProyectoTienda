@@ -1,0 +1,73 @@
+
+
+
+:root {
+    --primary-color: #d9416c;
+    --dark-bg: #212529;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.hero-banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('../imagen/Comercios.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+}
+
+.product-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    border-radius: 12px;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.product-img {
+    height: 220px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+#cart-counter {
+    font-size: 0.75rem;
+}
+
+.btn-primary {
+    background-color: #41D97B; 
+    border-color: #41D97B;
+}
+
+.btn-primary:hover {
+    background-color: #3fc271; 
+    border-color: #3fc271;
+}
+
+.btn-outline-primary {
+    color: #41D97B;
+    border-color: #41D97B;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary.active{
+    background-color: #3fc271;
+    color: white;
+    border-color: #3fc271;
+}
+
+.text-primary {
+    color: #3fc271 !important;
+}
