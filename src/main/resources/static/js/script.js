@@ -36,6 +36,7 @@ function filtrarProductos(cat) {
     else renderizarProductos(productos.filter(p => p.categoria.nombre === cat));
 }
 
+
 // Modal de detalles
 function verDetalle(id) {
     const p = productos.find(prod => prod.id === id);
@@ -53,7 +54,7 @@ function verDetalle(id) {
 
     new bootstrap.Modal(document.getElementById('productoModal')).show();
 }
-// Renderizar botones de categoría dinámicamente
+/** Renderizar botones de categoría dinámicamente
 function renderizarCategorias(listaProductos) {
     const contenedor = document.getElementById('categoria-container');
 
@@ -68,6 +69,7 @@ function renderizarCategorias(listaProductos) {
         contenedor.innerHTML += `<button class="btn btn-outline-primary" onclick="filtrarProductos('${cat}')">${cat}</button>`;
     });
 }
+    **/
 
 // LÓGICA DEL CARRITO
 
@@ -197,7 +199,7 @@ document.getElementById('orderForm').addEventListener('submit', function (e) {
             return response.json();
         })
         .then(data => {
-            // Éxito total
+            // Pedido finalizado
             alert(`¡Pedido realizado con éxito!\nCódigo de Pedido: N° ${data.id}\nCliente: ${data.nombreCliente}\nTotal: C$ ${data.total.toFixed(2)}`);
 
             // Limpiar todo el estado de la interfaz
@@ -214,6 +216,6 @@ document.getElementById('orderForm').addEventListener('submit', function (e) {
 
 // Carga inicial
 document.addEventListener('DOMContentLoaded', () => {
-    renderizarCategorias(productos); // <-- Genera los botones primero
-    renderizarProductos(productos);  // <-- Luego genera las tarjetas
+
+    renderizarProductos(productos);  // genera las tarjetas
 });

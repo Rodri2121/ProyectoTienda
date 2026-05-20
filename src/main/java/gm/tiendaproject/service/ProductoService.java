@@ -16,7 +16,11 @@ public class ProductoService {
         return productoRepository.findAll();
     }
 
-    public List<Producto> obtenerPorCategoria(String operations) {
-        return productoRepository.findByCategoriaNombre(operations);
+
+    public List<Producto> buscarProductosFiltrados(String nombre, String categoria) {
+        return productoRepository.buscarProductosFiltrados(nombre, categoria);
+    }
+    public List<Producto> obtenerPorCategoria(String categoria) {
+        return productoRepository.findByCategoriaNombre(categoria);
     }
 }//
